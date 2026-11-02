@@ -5,13 +5,15 @@ import org.hyjava.hyall.module.chapter.pojo.Chapter;
 import org.hyjava.hyall.module.chapter.pojo.dto.ChapterDTO;
 import org.springframework.beans.BeanUtils;
 import org.hyjava.hyall.module.chapter.repository.ChapterRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ChapterService implements IChapterService {
-    @Autowired
-    ChapterRepository chapterRepository;
+    private final ChapterRepository chapterRepository;
+
+    public ChapterService(ChapterRepository chapterRepository) {
+        this.chapterRepository = chapterRepository;
+    }
     @Override
     public Chapter addChapter(ChapterDTO chapter) {
         Chapter nChapter = new Chapter();

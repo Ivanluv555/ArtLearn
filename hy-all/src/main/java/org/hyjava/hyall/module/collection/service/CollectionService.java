@@ -5,15 +5,17 @@ import org.hyjava.hyall.module.collection.pojo.Collection;
 import org.hyjava.hyall.module.collection.pojo.dto.CollectionDTO;
 import org.hyjava.hyall.module.collection.repository.CollectionRepository;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class CollectionService implements ICollectionService{
-    @Autowired
-    CollectionRepository collectionRepository;
+    private final CollectionRepository collectionRepository;
+
+    public CollectionService(CollectionRepository collectionRepository) {
+        this.collectionRepository = collectionRepository;
+    }
 
     @Override
     public Collection addCollection(CollectionDTO collection){

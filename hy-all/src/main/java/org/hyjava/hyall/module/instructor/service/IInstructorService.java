@@ -3,9 +3,7 @@ import org.hyjava.hyall.common.core.result.Result;
 
 import org.hyjava.hyall.module.instructor.pojo.Instructor;
 import org.hyjava.hyall.module.instructor.pojo.dto.InstructorDTO;
-import org.springframework.stereotype.Service;
 
-@Service
 public interface IInstructorService {
     public Instructor addInstructor(InstructorDTO instructor);
     public Instructor updateInstructor(InstructorDTO instructor);

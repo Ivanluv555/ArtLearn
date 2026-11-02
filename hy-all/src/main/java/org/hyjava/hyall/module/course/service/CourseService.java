@@ -5,15 +5,17 @@ import org.hyjava.hyall.module.course.pojo.Course;
 import org.hyjava.hyall.module.course.pojo.dto.CourseDTO;
 import org.hyjava.hyall.module.course.repository.CourseRepository;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class CourseService implements ICourseService{
-    @Autowired
-    CourseRepository courseRepository;
+    private final CourseRepository courseRepository;
+
+    public CourseService(CourseRepository courseRepository) {
+        this.courseRepository = courseRepository;
+    }
 
     @Override
     public Course addCourse(CourseDTO course) {

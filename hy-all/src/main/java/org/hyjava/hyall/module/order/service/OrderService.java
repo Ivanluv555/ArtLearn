@@ -10,7 +10,6 @@ import org.hyjava.hyall.module.order.pojo.dto.OrderDTO;
 import org.hyjava.hyall.module.order.repository.OrderRepository;
 import org.hyjava.hyall.module.order.repository.OrderShippingAddressRepository;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +18,17 @@ import java.util.List;
 
 @Service
 public class OrderService implements IOrderService {
-    @Autowired
-    OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
+    private final AddRepository addRepository;
+    private final OrderShippingAddressRepository shippingAddressRepository;
 
-    @Autowired
-    AddRepository addRepository; // 需要查用户地址
-
-    @Autowired
-    OrderShippingAddressRepository shippingAddressRepository; // 需要存快照
+    public OrderService(OrderRepository orderRepository,
+                       AddRepository addRepository,
+                       OrderShippingAddressRepository shippingAddressRepository) {
+        this.orderRepository = orderRepository;
+        this.addRepository = addRepository;
+        this.shippingAddressRepository = shippingAddressRepository;
+    }
 
     @Override
     @Transactional // 务必加上事务

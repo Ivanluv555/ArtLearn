@@ -5,13 +5,15 @@ import org.hyjava.hyall.module.badge.pojo.Badge;
 import org.hyjava.hyall.module.badge.pojo.dto.BadgeDTO;
 import org.hyjava.hyall.module.badge.repository.BadgeRepository;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BadgeService implements IBadgeService{
-    @Autowired
-    BadgeRepository badgeRepository;
+    private final BadgeRepository badgeRepository;
+
+    public BadgeService(BadgeRepository badgeRepository) {
+        this.badgeRepository = badgeRepository;
+    }
 
     @Override
     public Badge addBadge(BadgeDTO badge){

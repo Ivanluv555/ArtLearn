@@ -5,13 +5,15 @@ import org.hyjava.hyall.module.artcategory.pojo.Artcategory;
 import org.hyjava.hyall.module.artcategory.pojo.dto.ArtcategoryDTO;
 import org.hyjava.hyall.module.artcategory.repository.ArtcategoryRepository;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ArtcategoryService implements IArtcategoryService {
-    @Autowired
-    ArtcategoryRepository artCateRepository;
+    private final ArtcategoryRepository artCateRepository;
+
+    public ArtcategoryService(ArtcategoryRepository artCateRepository) {
+        this.artCateRepository = artCateRepository;
+    }
 
     @Override
     public Artcategory addCate(ArtcategoryDTO artcategory) {

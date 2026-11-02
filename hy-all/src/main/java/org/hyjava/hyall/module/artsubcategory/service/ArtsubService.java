@@ -5,13 +5,15 @@ import org.hyjava.hyall.module.artsubcategory.pojo.dto.ArtsubcategoryDTO;
 import org.hyjava.hyall.module.artsubcategory.repository.ArtsubRepository;
 import org.hyjava.hyall.module.artsubcategory.pojo.Artsubcategory;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ArtsubService implements IArtsubService {
-    @Autowired
-    private ArtsubRepository artSubRepository;
+    private final ArtsubRepository artSubRepository;
+
+    public ArtsubService(ArtsubRepository artSubRepository) {
+        this.artSubRepository = artSubRepository;
+    }
 
     @Override
     public Artsubcategory addArtSub(ArtsubcategoryDTO artSubCategory) {

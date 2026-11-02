@@ -5,13 +5,15 @@ import org.hyjava.hyall.module.product.pojo.dto.ProductDTO;
 import org.hyjava.hyall.module.product.pojo.Product;
 import org.hyjava.hyall.module.product.repository.ProductRepository;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ProductService implements IProductService {
-    @Autowired
-    ProductRepository productRepository;
+    private final ProductRepository productRepository;
+
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     @Override
     public Product addOneProduct(ProductDTO product) {

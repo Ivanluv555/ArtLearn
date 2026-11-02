@@ -5,13 +5,15 @@ import org.hyjava.hyall.module.orderitem.pojo.Orderitem;
 import org.hyjava.hyall.module.orderitem.pojo.dto.OrderitemDTO;
 import org.hyjava.hyall.module.orderitem.repository.OrderitemRepository;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OrderitemService implements IOrderitemService {
-    @Autowired
-    OrderitemRepository orderItemRepository;
+    private final OrderitemRepository orderItemRepository;
+
+    public OrderitemService(OrderitemRepository orderItemRepository) {
+        this.orderItemRepository = orderItemRepository;
+    }
 
     @Override
     public Orderitem addOrderItem(OrderitemDTO orderItem){

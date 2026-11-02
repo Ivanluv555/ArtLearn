@@ -5,13 +5,15 @@ import org.hyjava.hyall.module.like.pojo.Like;
 import org.hyjava.hyall.module.like.pojo.dto.LikeDTO;
 import org.hyjava.hyall.module.like.repository.LikeRepository;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LikeService implements ILikeService {
-    @Autowired
-    LikeRepository likeRepository;
+    private final LikeRepository likeRepository;
+
+    public LikeService(LikeRepository likeRepository) {
+        this.likeRepository = likeRepository;
+    }
 
     @Override
     public Like addLike(LikeDTO like) {

@@ -3,9 +3,7 @@ import org.hyjava.hyall.common.core.result.Result;
 
 import org.hyjava.hyall.module.product.pojo.dto.ProductDTO;
 import org.hyjava.hyall.module.product.pojo.Product;
-import org.springframework.stereotype.Service;
 
-@Service
 public interface IProductService {
     public Product addOneProduct(ProductDTO product);
     public void addProducts(Iterable<Product> productList);

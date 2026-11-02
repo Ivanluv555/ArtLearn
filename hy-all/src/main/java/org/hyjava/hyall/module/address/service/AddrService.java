@@ -5,13 +5,15 @@ import org.hyjava.hyall.module.address.pojo.Address;
 import org.hyjava.hyall.module.address.pojo.dto.AddressDTO;
 import org.hyjava.hyall.module.address.repository.AddRepository;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AddrService implements IAddrService {
-    @Autowired
-    AddRepository addrepository;
+    private final AddRepository addrepository;
+
+    public AddrService(AddRepository addrepository) {
+        this.addrepository = addrepository;
+    }
 
     @Override
     public Address addUserAddress(AddressDTO address) {

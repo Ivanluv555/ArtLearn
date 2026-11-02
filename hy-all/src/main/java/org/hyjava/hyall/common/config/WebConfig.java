@@ -1,7 +1,6 @@
 package org.hyjava.hyall.common.config;
 
 import org.hyjava.hyall.common.auth.AuthInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -10,8 +9,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Autowired
-    private AuthInterceptor authInterceptor;
+    private final AuthInterceptor authInterceptor;
+
+    public WebConfig(AuthInterceptor authInterceptor) {
+        this.authInterceptor = authInterceptor;
+    }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {

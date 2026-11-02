@@ -5,14 +5,16 @@ import org.hyjava.hyall.module.comment.pojo.Comment;
 import org.hyjava.hyall.module.comment.pojo.dto.CommentDTO;
 import org.hyjava.hyall.module.comment.repository.CommentRepository;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CommentService implements ICommentService
 {
-    @Autowired
-    CommentRepository commentRepository;
+    private final CommentRepository commentRepository;
+
+    public CommentService(CommentRepository commentRepository) {
+        this.commentRepository = commentRepository;
+    }
 
     @Override
     public Comment addComment(CommentDTO comment){

@@ -5,7 +5,6 @@ import org.hyjava.hyall.module.user.pojo.User;
 import org.hyjava.hyall.module.user.pojo.dto.UserDTO;
 import org.hyjava.hyall.module.user.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.hyjava.hyall.common.utils.JwtUtils;
 import org.hyjava.hyall.common.exception.BizException;
@@ -14,8 +13,11 @@ import java.util.List;
 
 @Service
 public class UserService implements IUserService{
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public User addUser(UserDTO user) {

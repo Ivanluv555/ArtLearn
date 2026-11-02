@@ -10,7 +10,6 @@ import org.hyjava.hyall.module.course.pojo.dto.ChapterCompleteDTO;
 import org.hyjava.hyall.module.course.pojo.dto.EnrollRequestDTO;
 import org.hyjava.hyall.module.course.repository.UserCourseChapterCompletedRepository;
 import org.hyjava.hyall.module.course.repository.UserCourseEnrollmentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.hyjava.hyall.module.chapter.repository.ChapterRepository;
@@ -21,14 +20,17 @@ import java.util.List;
 @Service
 public class CourseEnrollmentService implements ICourseEnrollmentService {
 
-    @Autowired
-    UserCourseEnrollmentRepository enrollmentRepository;
+    private final UserCourseEnrollmentRepository enrollmentRepository;
+    private final UserCourseChapterCompletedRepository completedRepository;
+    private final ChapterRepository chapterRepository;
 
-    @Autowired
-    UserCourseChapterCompletedRepository completedRepository;
-
-    @Autowired
-    ChapterRepository chapterRepository;
+    public CourseEnrollmentService(UserCourseEnrollmentRepository enrollmentRepository,
+                                  UserCourseChapterCompletedRepository completedRepository,
+                                  ChapterRepository chapterRepository) {
+        this.enrollmentRepository = enrollmentRepository;
+        this.completedRepository = completedRepository;
+        this.chapterRepository = chapterRepository;
+    }
 
     @Override
     @Transactional
