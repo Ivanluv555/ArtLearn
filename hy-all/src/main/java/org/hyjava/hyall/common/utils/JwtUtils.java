@@ -2,14 +2,13 @@ package org.hyjava.hyall.common.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.hyjava.hyall.common.core.resultcode.ResultCodes;
 import org.hyjava.hyall.common.exception.BizException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.security.Key;
+import javax.crypto.SecretKey;
 import java.util.Date;
 
 @Component
@@ -27,7 +26,7 @@ public class JwtUtils {
     // Token 有效期：24小时
     private static final long EXPIRATION = 7 * 24 * 60 * 60 * 1000L;
 
-    private static Key getKey() {
+    private static SecretKey getKey() {
         return Keys.hmacShaKeyFor(SECRET_STRING.getBytes());
     }
 
@@ -36,10 +35,10 @@ public class JwtUtils {
      */
     public static String createToken(Integer userId) {
         return Jwts.builder()
-                .setSubject(String.valueOf(userId))
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
-                .signWith(getKey(), SignatureAlgorithm.HS256)
+                .subject(String.valueOf(userId))
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + EXPIRATION))
+                .signWith(getKey())
                 .compact();
     }
 
@@ -48,11 +47,11 @@ public class JwtUtils {
      */
     public static Integer parseToken(String token) {
         try {
-            Claims claims = Jwts.parserBuilder()
-                    .setSigningKey(getKey())
+            Claims claims = Jwts.parser()
+                    .verifyWith(getKey())
                     .build()
-                    .parseClaimsJws(token)
-                    .getBody();
+                    .parseSignedClaims(token)
+                    .getPayload();
             return Integer.parseInt(claims.getSubject());
         } catch (Exception e) {
             throw new BizException(ResultCodes.NOTLOGIN);
